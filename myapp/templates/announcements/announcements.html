@@ -30,8 +30,13 @@
             <td>{{ announcement.brand }}</td>
             <td>{{ announcement.model }}</td>
             <td>{{ announcement.date_added }}</td>
-            <td>
-                <a href="{% url 'announcement_detail' announcement.pk %}" class="btn btn-info">Szczegóły</a>
+           <td>
+                <a href="{% url 'announcement_detail' announcement.pk %}" class="btn btn-info">szczegóły</a>
+                {% if user.is_authenticated %}
+                {% if announcement.user == user or user.is_superuser %}
+                    <a href="{% url 'edit_announcement' announcement.pk %}" class="btn btn-warning">edytuj</a>
+                {% endif %}
+            {% endif %}
             </td>
             <td>
                 {% for category in announcement.categories.all %}

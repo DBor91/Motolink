@@ -1,4 +1,30 @@
-{% extends "base.html" %} {% block title %} Motolink - home {% endblock %}
+{% extends "base.html" %}
+{% block title %} Motolink - home {% endblock %}
 {% block content %}
+
+<h2 class="text-center mb-4">Ostatnio dodane</h2>
+<div class="container">
+    <div class="row justify-content-center">
+        {% for announcement in latest_announcements %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow">
+                <div class="card-body">
+                    <h5 class="card-title">{{ announcement.title }}</h5>
+                    <p class="card-text">{{ announcement.description|truncatechars:100 }}</p>
+                    <p class="card-text"><strong>Cena:</strong> {{ announcement.price }} zł</p>
+                    <a href="{% url 'announcement_detail' announcement.pk %}" class="btn btn-primary">Szczegóły</a>
+                </div>
+                <div class="card-footer text-muted">
+                    Dodano: {{ announcement.date_added|date:"Y-m-d H:i" }}
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="alert alert-info text-center">Brak ogłoszeń do wyświetlenia.</div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 
 {% endblock %}

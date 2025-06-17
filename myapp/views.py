@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import AnnouncementForm
 from django.views.generic.detail import DetailView
 from .models import Announcement
+from django.shortcuts import get_object_or_404
 
 class AnnouncementDetailView(DetailView):
     model = Announcement
@@ -12,7 +13,8 @@ class AnnouncementDetailView(DetailView):
     context_object_name = 'announcement'
 # Create your views here.
 def home(request):
-    return render(request, "home.html")
+    latest_announcements = Announcement.objects.all().order_by('-date_added')[:3]
+    return render(request, "home.html", {"latest_announcements": latest_announcements})
 
 def register(request):
     if request.method == 'POST':
@@ -42,3 +44,18 @@ def create_announcement(request):
     else:
         form = AnnouncementForm()
     return render(request, 'announcements/create/create_announcement.html', {'form': form})
+
+@login_required
+def edit_announcement(request, pk):
+    announcement = get_object_or_404(Announcement, pk=pk)
+    # Sprawdź uprawnienia: właściciel lub admin
+    if not (request.user == announcement.user or request.user.is_superuser):
+        return redirect('announcements')
+    if request.method == 'POST':
+        form = AnnouncementForm(request.POST, instance=announcement)
+        if form.is_valid():
+            form.save()
+            return redirect('announcement_detail', pk=announcement.pk)
+    else:
+        form = AnnouncementForm(instance=announcement)
+    return render(request, 'announcements/edit/edit_announcement.html', {'form': form, 'announcement': announcement})
