@@ -1,13 +1,4 @@
 {% extends "base.html" %} {% block title %} Motolink - home {% endblock %}
 {% block content %}
-     {% if user.is_authenticated %}
-    <p>Hi {{ user.username }}!</p>
-  <!--  <form action="{% url 'logout' %}" method="post">
-      {% csrf_token %}
-      <button type="submit">Log Out</button>
-    </form>
-  {% else %}
-   # <a href="{% url 'login' %}">Login</a>
-  #  <a href="{% url 'signup' %}">Register</a>
-  {% endif %} -->
+
 {% endblock %}
