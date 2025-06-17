@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="mb-0">{{ announcement.title }}</h2>
+                </div>
+                <div class="card-body">
+                    <p class="lead">{{ announcement.description }}</p>
+                    <hr>
+                    <div class="row mb-2">
+                        <div class="col-6">
+                            <strong>Cena:</strong> {{ announcement.price }} zł
+                        </div>
+                        <div class="col-6">
+                            <strong>Lokalizacja:</strong> {{ announcement.location }}
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-4">
+                            <strong>Marka:</strong> {{ announcement.brand }}
+                        </div>
+                        <div class="col-4">
+                            <strong>Model:</strong> {{ announcement.model }}
+                        </div>
+                        <div class="col-4">
+                            <strong>Rok produkcji:</strong> {{ announcement.production_year }}
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <strong>Data dodania:</strong> {{ announcement.date_added|date:"Y-m-d H:i" }}
+                    </div>
+                    {% if announcement.categories.all %}
+                    <div class="mb-3">
+                        <strong>Kategorie:</strong>
+                        {% for category in announcement.categories.all %}
+                            <span class="badge bg-primary text-white">{{ category.name }}</span>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    <a href="{% url 'announcements' %}" class="btn btn-outline-primary mt-3">
+                        &larr; Powrót do listy ogłoszeń
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

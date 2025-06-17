@@ -5,9 +5,42 @@
     {% if user.is_authenticated %}
       <a href="{% url 'create_announcement' %}" class="btn btn-success mb-3">Utwórz ogłoszenie</a>
     {% endif %}
-    <div id="announcement-list">
-      <!-- Tutaj pojawi się lista ogłoszeń w przyszłości -->
-      <p>Brak ogłoszeń do wyświetlenia.</p>
-    </div>
+    <h2>lista ogłoszeń</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Tytuł</th>
+            <th>Cena</th>
+            <th>Lokalizacja</th>
+            <th>Marka</th>
+            <th>Model</th>
+            <th>Data dodania</th>
+            <th>Akcje</th>
+            <th>Kategorie</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for announcement in announcements %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ announcement.title }}</td>
+            <td>{{ announcement.price }}</td>
+            <td>{{ announcement.location }}</td>
+            <td>{{ announcement.brand }}</td>
+            <td>{{ announcement.model }}</td>
+            <td>{{ announcement.created_at }}</td>
+            <td>
+                <a href="{% url 'announcement_detail' announcement.pk %}" class="btn btn-info">details</a>
+            </td>
+            <td>
+                {% for category in announcement.categories.all %}
+                    <span class="badge badge-primary">{{ category.name }}</span>
+                {% endfor %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
   </div>
 {% endblock %}

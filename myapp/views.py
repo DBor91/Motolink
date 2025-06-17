@@ -3,8 +3,13 @@ from django.contrib.auth import login
 from .forms import RegistrationForm
 from django.contrib.auth.decorators import login_required
 from .forms import AnnouncementForm
+from django.views.generic.detail import DetailView
+from .models import Announcement
 
-
+class AnnouncementDetailView(DetailView):
+    model = Announcement
+    template_name = 'announcements/announcement_detail.html'
+    context_object_name = 'announcement'
 # Create your views here.
 def home(request):
     return render(request, "home.html")
@@ -21,7 +26,8 @@ def register(request):
     return render(request, 'registration/register.html', {'form': form})
 
 def announcements(request):
-    return render(request, 'announcements/announcements.html')
+    announcements = Announcement.objects.all().order_by('-date_added')  # Newest first
+    return render(request, 'announcements/announcements.html', {'announcements': announcements})
 
 @login_required
 def create_announcement(request):
