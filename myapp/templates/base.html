@@ -9,16 +9,22 @@
       {% endblock %}
     </title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"  rel="stylesheet" />
+  <style>
+.navbar-toggler-icon {
+      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0,0,0,1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    }
+
+  </style>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd;">
   <div class="container-fluid">
     <a class="navbar-brand" href="{% url 'home' %}">Motolink</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon" ></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link" href="{% url 'home' %}">Strona Główna</a>
         </li>
@@ -29,26 +35,26 @@
           <a class="nav-link" href="{% url 'home' %}">Kontakt</a>
         </li>
       </ul>
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+      <ul class="navbar-nav ml-auto mb-2 mb-lg-0 align-items-center">
         {% if user.is_authenticated %}
-          <li class="nav-item me-2">
+          <li class="nav-item mr-2">
             <form action="{% url 'logout' %}" method="post" style="display:inline;">
               {% csrf_token %}
               <button class="btn btn-outline-danger" type="submit">Wyloguj</button>
             </form>
           </li>
           <li class="nav-item">
-            <span class="navbar-text ms-2"> Dzień dobry, {{ user.username }}</span>
+            <span class="navbar-text ml-2" style="margin-left: 30px;"> Dzień dobry, {{ user.username }}</span>
           </li>
         {% else %}
-          <li class="nav-item me-2">
-            <a class="btn btn-outline-primary" href="{% url 'login' %}">Zaloguj</a>
+          <li class="nav-item mr-2">
+            <a class="btn btn-outline-primary" style="margin-left: 10px;" href="{% url 'login' %}">Zaloguj</a>
           </li>
-          <li class="nav-item me-2">
-            <a class="btn btn-primary" href="{% url 'register' %}">Zarejestruj</a>
+          <li class="nav-item mr-2">
+            <a class="btn btn-primary" style="margin-left: 20px;" href="{% url 'register' %}">Zarejestruj</a>
           </li>
           <li class="nav-item">
-            <span class="navbar-text ms-2">Użytkownik wylogowany</span>
+            <span class="navbar-text ml-2" style="margin-left: 30px;">Użytkownik wylogowany</span>
           </li>
         {% endif %}
       </ul>
