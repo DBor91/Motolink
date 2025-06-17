@@ -34,4 +34,4 @@ def create_announcement(request):
             return redirect('announcements')
     else:
         form = AnnouncementForm()
-    return render(request, 'announcements/create_announcement.html', {'form': form})
+    return render(request, 'announcements/create/create_announcement.html', {'form': form})
