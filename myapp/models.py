@@ -5,7 +5,7 @@ from django.contrib.auth.models import AbstractUser
 
 class CustomUser(AbstractUser):
     is_admin = models.BooleanField(default=False)
-    # Usuń pola username/email z AbstractUser już je zawiera
+
 
 
 class Category(models.Model):
@@ -24,9 +24,9 @@ class Announcement(models.Model):
     production_year = models.PositiveIntegerField()
     date_added = models.DateTimeField(default=timezone.now)
 
-    # Zmień relację na CustomUser!
+
     user = models.ForeignKey(
-        CustomUser,  # ← TU JEST ZMIANA
+        CustomUser,
         on_delete=models.CASCADE,
         related_name='announcements'
     )

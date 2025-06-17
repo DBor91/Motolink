@@ -31,6 +31,7 @@ def create_announcement(request):
             announcement = form.save(commit=False)
             announcement.user = request.user
             announcement.save()
+            form.save_m2m()
             return redirect('announcements')
     else:
         form = AnnouncementForm()

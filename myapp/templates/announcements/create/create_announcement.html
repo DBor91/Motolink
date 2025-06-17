@@ -5,8 +5,8 @@
   <form method="post">
     {% csrf_token %}
     <div class="mb-3">
-      {{ form.category.label_tag }}<br>
-      {{ form.category }}
+    {{ form.categories.label_tag }}
+    {{ form.categories }}
     </div>
     <div class="mb-3">
       {{ form.title.label_tag }}
