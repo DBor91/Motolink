@@ -29,9 +29,9 @@
             <td>{{ announcement.location }}</td>
             <td>{{ announcement.brand }}</td>
             <td>{{ announcement.model }}</td>
-            <td>{{ announcement.created_at }}</td>
+            <td>{{ announcement.date_added }}</td>
             <td>
-                <a href="{% url 'announcement_detail' announcement.pk %}" class="btn btn-info">details</a>
+                <a href="{% url 'announcement_detail' announcement.pk %}" class="btn btn-info">Szczegóły</a>
             </td>
             <td>
                 {% for category in announcement.categories.all %}
