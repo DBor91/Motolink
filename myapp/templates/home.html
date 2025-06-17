@@ -1,4 +1,13 @@
-{% extends "base.html" %} {% block title %} Home Page {% endblock %}
+{% extends "base.html" %} {% block title %} Strona główna test gdzie to jest {% endblock %}
 {% block content %}
-    <p>this is homepage adada</p>
+     {% if user.is_authenticated %}
+    <p>Hi {{ user.username }}!</p>
+    <form action="{% url 'logout' %}" method="post">
+      {% csrf_token %}
+      <button type="submit">Log Out</button>
+    </form>
+  {% else %}
+    <a href="{% url 'login' %}">Login</a>
+    <a href="{% url 'signup' %}">Register</a>
+  {% endif %}
 {% endblock %}
