@@ -38,17 +38,17 @@
             </form>
           </li>
           <li class="nav-item">
-            <span class="navbar-text ms-2"> Welcome {{ user.username }}</span>
+            <span class="navbar-text ms-2"> Dzień dobry, {{ user.username }}</span>
           </li>
         {% else %}
           <li class="nav-item me-2">
-            <a class="btn btn-outline-primary" href="{% url 'login' %}">Login</a>
+            <a class="btn btn-outline-primary" href="{% url 'login' %}">Zaloguj</a>
           </li>
           <li class="nav-item me-2">
-            <a class="btn btn-primary" href="{% url 'register' %}">Register</a>
+            <a class="btn btn-primary" href="{% url 'register' %}">Zarejestruj</a>
           </li>
           <li class="nav-item">
-            <span class="navbar-text ms-2">User logged out</span>
+            <span class="navbar-text ms-2">Użytkownik wylogowany</span>
           </li>
         {% endif %}
       </ul>
