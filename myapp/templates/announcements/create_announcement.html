@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h2>Dodaj ogłoszenie</h2>
+  <form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+      {{ form.category.label_tag }}<br>
+      {{ form.category }}
+    </div>
+    <div class="mb-3">
+      {{ form.title.label_tag }}
+      {{ form.title }}
+    </div>
+    <div class="mb-3">
+      {{ form.description.label_tag }}
+      {{ form.description }}
+    </div>
+    <div class="mb-3">
+      {{ form.price.label_tag }}
+      {{ form.price }}
+    </div>
+    <div class="mb-3">
+      {{ form.location.label_tag }}
+      {{ form.location }}
+    </div>
+    <div class="mb-3">
+      {{ form.brand.label_tag }}
+      {{ form.brand }}
+    </div>
+    <div class="mb-3">
+      {{ form.model.label_tag }}
+      {{ form.model }}
+    </div>
+    <div class="mb-3">
+      {{ form.production_year.label_tag }}
+      {{ form.production_year }}
+    </div>
+    <button type="submit" class="btn btn-success">Dodaj ogłoszenie</button>
+  </form>
+</div>
+{% endblock %}

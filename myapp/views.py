@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from .forms import RegistrationForm
+from django.contrib.auth.decorators import login_required
+from .forms import AnnouncementForm
 
 
 # Create your views here.
@@ -20,3 +22,16 @@ def register(request):
 
 def announcements(request):
     return render(request, 'announcements/announcements.html')
+
+@login_required
+def create_announcement(request):
+    if request.method == 'POST':
+        form = AnnouncementForm(request.POST)
+        if form.is_valid():
+            announcement = form.save(commit=False)
+            announcement.user = request.user
+            announcement.save()
+            return redirect('announcements')
+    else:
+        form = AnnouncementForm()
+    return render(request, 'announcements/create_announcement.html', {'form': form})
