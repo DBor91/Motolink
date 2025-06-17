@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from .forms import RegistrationForm
 
+
 # Create your views here.
 def home(request):
     return render(request, "home.html")
@@ -16,3 +17,6 @@ def register(request):
     else:
         form = RegistrationForm()
     return render(request, 'registration/register.html', {'form': form})
+
+def announcements(request):
+    return render(request, 'announcements/announcements.html')
