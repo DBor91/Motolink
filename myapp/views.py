@@ -11,7 +11,7 @@ class AnnouncementDetailView(DetailView):
     model = Announcement
     template_name = 'announcements/announcement_detail.html'
     context_object_name = 'announcement'
-# Create your views here.
+
 def home(request):
     latest_announcements = Announcement.objects.all().order_by('-date_added')[:3]
     return render(request, "home.html", {"latest_announcements": latest_announcements})
